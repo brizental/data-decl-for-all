@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Accordion, List, Icon, Header, Grid, Button, Divider } from 'semantic-ui-react'
+import { Accordion, List, Icon, Header, Grid, Button, Table } from 'semantic-ui-react'
 
 function Metrics({ metrics, setMetrics, setEditingMetric }) {
   const [activeIndex, setActiveindex] = useState(-1);
@@ -131,101 +131,117 @@ $schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
                             <Button type="button" onClick={(e) => { e.stopPropagation(); removeMetric(index) }} size="mini" color="red" icon="trash" />
                         </Accordion.Title>
                         <Accordion.Content active={activeIndex === index}>
-                            <List>
-                                <List.Item>
-                                    <List.Content>
-                                        <List.Header>Type</List.Header>
-                                        <List.Description>
-                                            {metric.type}
-                                        </List.Description>
-                                    </List.Content>
-                                </List.Item>
-                                <List.Item>
-                                    <List.Content>
-                                        <List.Header>Lifetime</List.Header>
-                                        <List.Description>
-                                            {metric.lifetime}
-                                        </List.Description>
-                                    </List.Content>
-                                </List.Item>
-                                <List.Item>
-                                    <List.Header>Send in pings</List.Header>
-                                    <List>
-                                        {metric.sendInPings.map(ping => (
-                                            <List.Item key={ping}>{ping}</List.Item>
-                                        ))}
-                                    </List>
-                                </List.Item>
-                                <List.Item>
-                                    <List.Content>
-                                        <List.Header>Description</List.Header>
-                                        <List.Description>
+                            <Table celled>
+                                <Table.Row>
+                                    <Table.Cell>Category</Table.Cell>
+                                    <Table.Cell>{metric.category}</Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Name</Table.Cell>
+                                    <Table.Cell>{metric.name}</Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Type</Table.Cell>
+                                    <Table.Cell>{metric.type}</Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                        <Table.Cell>Lifetime</Table.Cell>
+                                        <Table.Cell>{metric.lifetime}</Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Send in pings</Table.Cell>
+                                    <Table.Cell>
+                                        <List>
+                                            {metric.sendInPings.map(ping => (
+                                                <List.Item as='li' value='-' key={ping}>
+                                                    {ping}
+                                                </List.Item>
+                                            ))}
+                                        </List>
+                                    </Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                        <Table.Cell>Description</Table.Cell>
+                                        <Table.Cell>
                                             {metric.description}
-                                        </List.Description>
-                                    </List.Content>
-                                </List.Item>
-                                <List.Item>
-                                    <List.Header>Bugs</List.Header>
-                                    <List>
-                                        {metric.bugs.map(bug => (
-                                            <List.Item key={bug}>{bug}</List.Item>
-                                        ))}
-                                    </List>
-                                </List.Item>
-                                <List.Item>
-                                    <List.Header>Data Reviews</List.Header>
-                                    <List>
-                                        {metric.dataReviews.map(review => (
-                                            <List.Item key={review}>{review}</List.Item>
-                                        ))}
-                                    </List>
-                                </List.Item>
-                                <List.Item>
-                                    <List.Header>Data Sensitivity</List.Header>
-                                    <List>
-                                        {metric.dataSensitivity.map(sensitivity => (
-                                            <List.Item key={sensitivity}>{sensitivity}</List.Item>
-                                        ))}
-                                    </List>
-                                </List.Item>
-                                <List.Item>
-                                    <List.Header>Notification Emails</List.Header>
-                                    <List>
-                                        {metric.notificationEmails.map(email => (
-                                            <List.Item key={email}>{email}</List.Item>
-                                        ))}
-                                    </List>
-                                </List.Item>
-                                <List.Item>
-                                    <List.Content>
-                                        <List.Header>Expires</List.Header>
-                                        <List.Description>
+                                        </Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Bugs</Table.Cell>
+                                    <Table.Cell>
+                                        <List>
+                                            {metric.bugs.map(bug => (
+                                                <List.Item as='li' value='-' key={bug}>
+                                                    {bug}
+                                                </List.Item>
+                                            ))}
+                                        </List>
+                                    </Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Data Reviews</Table.Cell>
+                                    <Table.Cell>
+                                        <List>
+                                            {metric.dataReviews.map(review => (
+                                                <List.Item as='li' value='-' key={review}>
+                                                    {review}
+                                                </List.Item>
+                                            ))}
+                                        </List>
+                                    </Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Data Sensitivity</Table.Cell>
+                                    <Table.Cell>
+                                        <List>
+                                            {metric.dataSensitivity.map(sensitivity => (
+                                                <List.Item as='li' value='-' key={sensitivity}>
+                                                    {sensitivity}
+                                                </List.Item>
+                                            ))}
+                                        </List>
+                                    </Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Notification Emails</Table.Cell>
+                                    <Table.Cell>
+                                        <List>
+                                            {metric.notificationEmails.map(email => (
+                                                <List.Item as='li' value='-' key={email}>
+                                                    {email}
+                                                </List.Item>
+                                            ))}
+                                        </List>
+                                    </Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                        <Table.Cell>Expires</Table.Cell>
+                                        <Table.Cell>
                                             {metric.expires}
-                                        </List.Description>
-                                    </List.Content>
-                                </List.Item>
-                                <List.Item>
-                                    <List.Header>Extra Keys</List.Header>
-                                    <List>
+                                        </Table.Cell>
+                                </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Extra Keys</Table.Cell>
+                                    <Table.Cell>
                                         {metric.extraKeys.map(({ name, description, type }) => (
-                                            <List.Item key={name}>
-                                                <List.Header>{name}</List.Header>
-                                                <List>
-                                                    <List.Item>
-                                                        <List.Header>Description</List.Header>
-                                                        <List.Description>{description}</List.Description>
-                                                    </List.Item>
-                                                    <List.Item>
-                                                        <List.Header>Type</List.Header>
-                                                        <List.Description>{type}</List.Description>
-                                                    </List.Item>
-                                                </List>
-                                            </List.Item>
+                                            <Table>
+                                                <Table.Row>
+                                                    <Table.Cell>Name</Table.Cell>
+                                                    <Table.Cell>{name}</Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row>
+                                                    <Table.Cell>Description</Table.Cell>
+                                                    <Table.Cell>{description}</Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row>
+                                                    <Table.Cell>Type</Table.Cell>
+                                                    <Table.Cell>{type}</Table.Cell>
+                                                </Table.Row>
+                                            </Table>
                                         ))}
-                                    </List>
-                                </List.Item>
-                            </List>
-                            <Divider horizontal />
+                                    </Table.Cell>
+                                </Table.Row>
+                            </Table>
                         </Accordion.Content>
                     </div>
                     ))
