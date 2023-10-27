@@ -198,6 +198,10 @@ function TheForm({ handleNewMetric, value = {} }) {
                                 <Grid.Row style={{ display: "flex", height: 38 }} key={`sensitivity-${index}`}>
                                     <Form.Select
                                         value={sensitivity}
+                                        style={{
+                                            borderTopRightRadius: 0,
+                                            borderBottomRightRadius: 0,
+                                        }}
                                         options={[
                                             { text: 'technical', value: 'technical' },
                                             { text: 'interaction', value: 'interaction' },
@@ -206,7 +210,13 @@ function TheForm({ handleNewMetric, value = {} }) {
                                         ]}
                                         onChange={({ target: { value: newValue }})=> changeElementOnStateArray(newValue, index, dataSensitivity, setDataSensitivity)}
                                     />
-                                    <Button icon="trash" onClick={() => removeElementFromStateArray(index, dataSensitivity, setDataSensitivity)} />
+                                    <Button
+                                        style={{
+                                            borderTopLeftRadius: 0,
+                                            borderBottomLeftRadius: 0,
+                                        }}
+                                        icon="trash"
+                                        onClick={() => removeElementFromStateArray(index, dataSensitivity, setDataSensitivity)} />
                                 </Grid.Row>
                                 ))
                             }
