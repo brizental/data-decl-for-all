@@ -9,13 +9,16 @@ function Metrics({ metrics, setMetrics, setEditingMetric }) {
   }
 
   const generateMetricsYAML = () => {
-    let yaml = "";
+    let yaml = `
+---
+$schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
+`;
     const sortedMetrics = metrics.sort((a, b) => a.category.localeCompare(b.category));
 
     let previousCategory = undefined;
     for (const metric of sortedMetrics) {
         if (previousCategory !== metric.category) {
-            yaml += `${metric.category}:`
+            yaml += `\n\n${metric.category}:`
         }
         previousCategory = metric.category;
 
@@ -32,7 +35,7 @@ function Metrics({ metrics, setMetrics, setEditingMetric }) {
         bugs:
             ${metric.bugs.map(bug => (
                 `- ${bug}`
-            )).join("\n                ").trim()}
+            )).join("\n            ").trim()}
         data_reviews:
             ${metric.dataReviews.map(dataReview => (
                 `- ${dataReview}`
@@ -40,20 +43,25 @@ function Metrics({ metrics, setMetrics, setEditingMetric }) {
         data_sensitivity:
             ${metric.dataSensitivity.map(dataSensitivity => (
                 `- ${dataSensitivity}`
-            )).join("\n                ").trim()}
+            )).join("\n            ").trim()}
         notification_emails:
             ${metric.notificationEmails.map(notificaitonEmail => (
                 `- ${notificaitonEmail}`
-            )).join("\n                ").trim()}
-        expires: ${metric.expires}
+            )).join("\n            ").trim()}
+        expires: ${metric.expires}`
+
+        if (metric.extraKeys.length > 0) {
+            yaml += `
         extra_keys:
             ${metric.extraKeys.map(({ name, description, type}) => (
                 `${name}:
                 description: |
                     ${description}
                 type: ${type}`
-            )).join("\n                ").trim()}
+            )).join("\n            ").trim()}
         `
+        }
+
     }
 
     return yaml;
