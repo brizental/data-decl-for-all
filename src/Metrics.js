@@ -133,23 +133,23 @@ $schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
                         <Accordion.Content active={activeIndex === index}>
                             <Table celled>
                                 <Table.Row>
-                                    <Table.Cell>Category</Table.Cell>
+                                    <Table.HeaderCell>Category</Table.HeaderCell>
                                     <Table.Cell>{metric.category}</Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                    <Table.Cell>Name</Table.Cell>
+                                    <Table.HeaderCell>Name</Table.HeaderCell>
                                     <Table.Cell>{metric.name}</Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                    <Table.Cell>Type</Table.Cell>
+                                    <Table.HeaderCell>Type</Table.HeaderCell>
                                     <Table.Cell>{metric.type}</Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                        <Table.Cell>Lifetime</Table.Cell>
+                                        <Table.HeaderCell>Lifetime</Table.HeaderCell>
                                         <Table.Cell>{metric.lifetime}</Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                    <Table.Cell>Send in pings</Table.Cell>
+                                    <Table.HeaderCell>Send in pings</Table.HeaderCell>
                                     <Table.Cell>
                                         <List>
                                             {metric.sendInPings.map(ping => (
@@ -161,13 +161,13 @@ $schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
                                     </Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                        <Table.Cell>Description</Table.Cell>
+                                        <Table.HeaderCell>Description</Table.HeaderCell>
                                         <Table.Cell>
                                             {metric.description}
                                         </Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                    <Table.Cell>Bugs</Table.Cell>
+                                    <Table.HeaderCell>Bugs</Table.HeaderCell>
                                     <Table.Cell>
                                         <List>
                                             {metric.bugs.map(bug => (
@@ -179,7 +179,7 @@ $schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
                                     </Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                    <Table.Cell>Data Reviews</Table.Cell>
+                                    <Table.HeaderCell>Data Reviews</Table.HeaderCell>
                                     <Table.Cell>
                                         <List>
                                             {metric.dataReviews.map(review => (
@@ -191,7 +191,7 @@ $schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
                                     </Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                    <Table.Cell>Data Sensitivity</Table.Cell>
+                                    <Table.HeaderCell>Data Sensitivity</Table.HeaderCell>
                                     <Table.Cell>
                                         <List>
                                             {metric.dataSensitivity.map(sensitivity => (
@@ -203,7 +203,7 @@ $schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
                                     </Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                    <Table.Cell>Notification Emails</Table.Cell>
+                                    <Table.HeaderCell>Notification Emails</Table.HeaderCell>
                                     <Table.Cell>
                                         <List>
                                             {metric.notificationEmails.map(email => (
@@ -215,26 +215,26 @@ $schema: moz://mozilla.org/schemas/glean/metrics/2-0-0
                                     </Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                        <Table.Cell>Expires</Table.Cell>
+                                        <Table.HeaderCell>Expires</Table.HeaderCell>
                                         <Table.Cell>
                                             {metric.expires}
                                         </Table.Cell>
                                 </Table.Row>
                                 <Table.Row>
-                                    <Table.Cell>Extra Keys</Table.Cell>
+                                    <Table.HeaderCell>Extra Keys</Table.HeaderCell>
                                     <Table.Cell>
                                         {metric.extraKeys.map(({ name, description, type }) => (
                                             <Table>
                                                 <Table.Row>
-                                                    <Table.Cell>Name</Table.Cell>
+                                                    <Table.HeaderCell>Name</Table.HeaderCell>
                                                     <Table.Cell>{name}</Table.Cell>
                                                 </Table.Row>
                                                 <Table.Row>
-                                                    <Table.Cell>Description</Table.Cell>
+                                                    <Table.HeaderCell>Description</Table.HeaderCell>
                                                     <Table.Cell>{description}</Table.Cell>
                                                 </Table.Row>
                                                 <Table.Row>
-                                                    <Table.Cell>Type</Table.Cell>
+                                                    <Table.HeaderCell>Type</Table.HeaderCell>
                                                     <Table.Cell>{type}</Table.Cell>
                                                 </Table.Row>
                                             </Table>
