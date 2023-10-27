@@ -84,6 +84,22 @@ function TheForm({ handleNewMetric, value = {} }) {
         resetState();
     }
 
+    const prefillInteraction = () => {
+        setExtraKeys([{
+            name: "screen",
+            type: "string",
+            description: "The screen where the interaction happened"
+        }])
+    }
+
+    const prefillImpression = () => {
+        setExtraKeys([{
+            name: "screen",
+            type: "string",
+            description: "The screen the user has just moved to"
+        }])
+    }
+
     return (
         <Form onSubmit={submitMetricAndClearForm}>
             <Header as='h1'>
@@ -117,7 +133,15 @@ function TheForm({ handleNewMetric, value = {} }) {
                     <Grid.Column>
                         <Form.Field>
                             <label>Lifetime</label>
-                            <Input value={lifetime} onChange={({target: { value }}) => setLifetime(value)} />
+                            <Form.Select
+                                value={lifetime}
+                                options={[
+                                    { text: 'ping', value: 'ping' },
+                                    { text: 'application', value: 'application' },
+                                    { text: 'user', value: 'user' },
+                                ]}
+                                onChange={({target: { value }}) => setLifetime(value)}
+                            />
                             </Form.Field>
                         </Grid.Column>
                     <Grid.Column>
@@ -171,15 +195,18 @@ function TheForm({ handleNewMetric, value = {} }) {
                                 Data sensitivity
                             </Header>
                             {dataSensitivity.map((sensitivity, index) => (
-                                <Grid.Row key={`sensitivity-${index}`}>
-                                    <Input
-                                        action={{
-                                            icon: "trash",
-                                            onClick: () => removeElementFromStateArray(index, dataSensitivity, setDataSensitivity)
-                                        }}
+                                <Grid.Row style={{ display: "flex", height: 38 }} key={`sensitivity-${index}`}>
+                                    <Form.Select
                                         value={sensitivity}
+                                        options={[
+                                            { text: 'technical', value: 'technical' },
+                                            { text: 'interaction', value: 'interaction' },
+                                            { text: 'stored content', value: 'stored_content' },
+                                            { text: 'highly sensitive', value: 'highly_sensitive' },
+                                        ]}
                                         onChange={({ target: { value: newValue }})=> changeElementOnStateArray(newValue, index, dataSensitivity, setDataSensitivity)}
                                     />
+                                    <Button icon="trash" onClick={() => removeElementFromStateArray(index, dataSensitivity, setDataSensitivity)} />
                                 </Grid.Row>
                                 ))
                             }
@@ -265,6 +292,16 @@ function TheForm({ handleNewMetric, value = {} }) {
                 <Header as="h5">
                     Extra Keys
                 </Header>
+                {extraKeys.length === 0 && (
+                    <div style={{ width: "100%" }}>
+                        <Button style={{ marginTop: 20 }} type="button" onClick={prefillInteraction}>
+                            Pre-fill for interaction
+                        </Button>
+                        <Button style={{ marginTop: 20 }} type="button" onClick={prefillImpression}>
+                            Pre-fill for impression
+                        </Button>
+                    </div>
+                )}
                 {extraKeys.map(({ name, description, type }, index) => (
                     <Grid.Row key={`extra-key-${index}`}>
                     <Grid.Row style={{ marginTop: 20 }}>
@@ -286,13 +323,17 @@ function TheForm({ handleNewMetric, value = {} }) {
                         </Form.Field>
                     </Grid.Row>
                     <Grid.Row style={{ marginTop: 20 }}>
-                        <Form.Field>
-                        <label>Type</label>
-                        <Input
+                        <Form.Select
+                            fluid
+                            label='Type'
                             value={type}
-                            onChange={({ target: { value: newValue }})=> changeExtraKeyProp(newValue, index, "type")}
+                            options={[
+                                { text: 'string', value: 'string' },
+                                { text: 'quantity', value: 'quantity' },
+                                { text: 'boolean', value: 'boolean' },
+                              ]}
+                              onChange={({ target: { value: newValue }})=> changeExtraKeyProp(newValue, index, "type")}
                         />
-                        </Form.Field>
                     </Grid.Row>
                     <Button style={{ marginTop: 20 }} color="red" type="button" onClick={() => removeElementFromStateArray(index, extraKeys, setExtraKeys)}>
                         Remove this extra key
@@ -303,7 +344,9 @@ function TheForm({ handleNewMetric, value = {} }) {
                     Add more extra keys
                 </Button>
             </Grid.Row>
-            <Button style={{ marginTop: 40, width: "100%" }} color="green" type="submit">Add metric</Button>
+            <Grid.Row>
+                <Button style={{ marginTop: 40, width: "100%" }} color="green" type="submit">Add metric</Button>
+            </Grid.Row>
         </Form>
     )
 }
