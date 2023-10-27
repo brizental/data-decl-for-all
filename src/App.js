@@ -4,7 +4,9 @@ import TheForm from "./Form"
 import Metrics from "./Metrics"
 
 function App() {
-  const [metrics, setMetrics] = useState(JSON.parse(localStorage.getItem("metrics")));
+  const storedMetrics = localStorage.getItem("metrics");
+
+  const [metrics, setMetrics] = useState(storedMetrics ? JSON.parse(storedMetrics) : []);
   const [editingMetric, setEditingMetric] = useState({});
 
   useEffect(() => {
