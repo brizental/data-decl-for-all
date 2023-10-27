@@ -48,7 +48,7 @@ function Metrics({ metrics, setMetrics, setEditingMetric }) {
         expires: ${metric.expires}
         extra_keys:
             ${metric.extraKeys.map(({ name, description, type}) => (
-                `name:
+                `${name}:
                 description: |
                     ${description}
                 type: ${type}`
