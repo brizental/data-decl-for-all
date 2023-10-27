@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import { Grid } from 'semantic-ui-react'
+import TheForm from "./Form"
+import Metrics from "./Metrics"
 
 function App() {
+  const [metrics, setMetrics] = useState(JSON.parse(localStorage.getItem("metrics")));
+  const [editingMetric, setEditingMetric] = useState({});
+
+  useEffect(() => {
+    localStorage.setItem("metrics", JSON.stringify(metrics));
+  }, [metrics]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid columns={2} style={{margin: "50px"}}>
+      <Grid.Row>
+        <Grid.Column>
+          <TheForm value={editingMetric} handleNewMetric={newMetric => setMetrics([...metrics, newMetric])} />
+        </Grid.Column>
+        <Grid.Column>
+          <Metrics
+            metrics={metrics}
+            setMetrics={setMetrics}
+            setEditingMetric={setEditingMetric} />
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   );
 }
 
